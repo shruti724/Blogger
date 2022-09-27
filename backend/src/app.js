@@ -65,10 +65,17 @@ app.post("/login", async(req, res) => {
         const email = req.body.email;
         const password = req.body.password;
 
-        console.log(`${email} ans password is ${password}`)
+        const useremail = await Register.findOne({email:email});
+        
+        
+        if(useremail.password === password){
+            res.status(201).render("index");
+        }else{
+            res.send("Invalid login Details");
+        }
         
     } catch (error) {
-        res.status(400).send("Invalid Email")
+        res.status(400).send("Invalid login Details")
     }
 
 })
