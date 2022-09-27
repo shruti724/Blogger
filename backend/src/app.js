@@ -24,7 +24,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-    res.render("register")
+    res.render("register");
+});
+
+app.get("/login", (req, res) => {
+    res.render("login");
 });
 
 // Create a new User in the database
@@ -55,6 +59,19 @@ app.post("/register", async(req, res) => {
         res.status(400).send(error);
     }
 });
+
+app.post("/login", async(req, res) => {
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+
+        console.log(`${email} ans password is ${password}`)
+        
+    } catch (error) {
+        res.status(400).send("Invalid Email")
+    }
+
+})
 
 app.listen(port, () => {
     console.log(`server is running at port no. ${port}`);
